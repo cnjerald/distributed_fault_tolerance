@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/admin_controller.js"></script>
+</head>
+<body>
+    <h2>Admin Dashboard</h2>
+
+    <!-- Logout button -->
+    <button id="logout" style="float:right;">Logout</button>
+
+    <!-- ---------------- User Management ---------------- -->
+    <div id="user_section">
+        <h2>User Management</h2>
+
+        <h3>Create User</h3>
+        <label>Username:</label>
+        <input type="text" id="new_username">
+        <label>Type:</label>
+        <select id="new_type">
+            <option value="STUDENT">STUDENT</option>
+            <option value="TEACHER">TEACHER</option>
+        </select>
+        <button id="create_user">Create</button>
+
+        <h3>Existing Users</h3>
+        <table border="1" id="users_table">
+            <thead>
+                <tr><th>ID</th><th>Username</th><th>Type</th><th>Actions</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- ---------------- Subjects Management ---------------- -->
+    <h2>Subjects Management</h2>
+
+    <h3>Add Subject</h3>
+    <label>Course Code:</label>
+    <input type="text" id="course_code"><br>
+
+    <label>Units:</label>
+    <input type="number" id="units"><br>
+
+    <label>Max Enrollees:</label>
+    <input type="number" id="max_enrollees"><br>
+
+    <button id="create_subject">Add Subject</button>
+
+    <hr>
+
+    <h3>Subject List</h3>
+    <table border="1" id="subjects_table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Course Code</th>
+                <th>Units</th>
+                <th>Added By</th>
+                <th>Current</th>
+                <th>Max</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- ---------------- Student Records Management ---------------- -->
+    <h2>Student Records</h2>
+
+    <h3>Add Record</h3>
+    <label>Student Username:</label>
+    <select id="record_student_username"></select><br>
+
+    <label>Course:</label>
+    <select id="record_course"></select><br>
+
+    <label>Grade:</label>
+    <input type="number" id="record_grade" value="-1"><br>
+
+    <button id="create_record">Add Record</button>
+
+    <hr>
+
+    <h3>Student Records List</h3>
+    <table border="1" id="records_table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student Username</th>
+                <th>Course</th>
+                <th>Grade</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- ---------------- Edit Student Grade ---------------- -->
+    <h2>Edit Student Grade</h2>
+
+    <label>Record ID:</label>
+    <select id="edit_record_id"></select><br>
+
+    <label>New Grade:</label>
+    <input type="number" id="edit_grade" value="0"><br>
+
+    <button id="update_grade">Update Grade</button>
+
+</body>
+</html>
