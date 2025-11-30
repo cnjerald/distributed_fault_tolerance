@@ -17,7 +17,9 @@ $(document).ready(function () {
                 if (res.message === "Login OK") {
                     const type = res.user.type;
                     localStorage.setItem("currentUser", JSON.stringify(res.user));
+
                     // Redirect based on user type
+
                     if (type === "ADMIN") window.location.href = "admin.html";
                     else if (type === "TEACHER") window.location.href = "teacher.html";
                     else window.location.href = "student.html";

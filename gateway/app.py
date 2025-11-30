@@ -14,7 +14,10 @@ CORS(app)
 
 # ---------------- Backend Nodes ----------------
 LOGIN_URL = "http://localhost:5001/login"
-ADMIN_URL = "http://localhost:5003"  # still used for admin CRUD
+ADMIN_URL = "http://localhost:5003"
+TEACHER_URL = "http://localhost:5004"
+STUDENT_URL = "http://localhost:5005"
+
 
 # ---------------- Routes ----------------
 
@@ -144,6 +147,134 @@ def admin_student_records_detail(record_id):
     except Exception as e:
         print("ERROR:", e)
         return jsonify({"error": "Admin service unavailable"}), 503
+
+# ------------ TEACHER STUFFS -----------
+
+@app.route("/api/teacher/login", methods=["POST"])
+def teacher_login():
+    try:
+        payload = request.get_json()
+        res = requests.post(f"{TEACHER_URL}/teacher/login", json=payload, timeout=2)
+        return jsonify(res.json()), res.status_code
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"error": "Teacher service unavailable"}), 503
+
+@app.route("/api/teacher/subjects", methods=["GET", "POST"])
+def teacher_subjects():
+    try:
+        payload = request.get_json() if request.method == "POST" else None
+
+        if request.method == "GET":
+            res = requests.get(f"{TEACHER_URL}/teacher/subjects", timeout=2)
+        else:  # POST
+            res = requests.post(f"{TEACHER_URL}/teacher/subjects", json=payload, timeout=2)
+
+        return jsonify(res.json()), res.status_code
+
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"error": "Teacher service unavailable"}), 503
+
+@app.route("/api/teacher/subjects/<int:subj_id>", methods=["PUT", "DELETE"])
+def teacher_subjects_detail(subj_id):
+    try:
+        payload = request.get_json() if request.method == "PUT" else None
+
+        if request.method == "DELETE":
+            res = requests.delete(f"{TEACHER_URL}/teacher/subjects/{subj_id}", timeout=2)
+        else:  # PUT
+            res = requests.put(f"{TEACHER_URL}/teacher/subjects/{subj_id}", json=payload, timeout=2)
+
+        return jsonify(res.json()), res.status_code
+
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"error": "Teacher service unavailable"}), 503
+    
+@app.route("/api/teacher/student_records", methods=["GET", "POST"])
+def teacher_student_records():
+    try:
+        payload = request.get_json() if request.method == "POST" else None
+
+        if request.method == "GET":
+            res = requests.get(f"{TEACHER_URL}/teacher/student_records", timeout=2)
+        else:
+            res = requests.post(f"{TEACHER_URL}/teacher/student_records", json=payload, timeout=2)
+
+        return jsonify(res.json()), res.status_code
+    
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"error": "Teacher service unavailable"}), 503
+
+@app.route("/api/teacher/student_records/<int:record_id>", methods=["PUT", "DELETE"])
+def teacher_student_records_detail(record_id):
+    try:
+        payload = request.get_json() if request.method == "PUT" else None
+
+        if request.method == "DELETE":
+            res = requests.delete(f"{TEACHER_URL}/teacher/student_records/{record_id}", timeout=2)
+        else:
+            res = requests.put(f"{TEACHER_URL}/teacher/student_records/{record_id}", json=payload, timeout=2)
+
+        return jsonify(res.json()), res.status_code
+    
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"error": "Teacher service unavailable"}), 503
+
+@app.route("/api/teacher/users", methods=["GET"])
+def teacher_users():
+    try:
+        res = requests.get(f"{TEACHER_URL}/teacher/users", timeout=2)
+        return jsonify(res.json()), res.status_code
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"error": "Teacher service unavailable"}), 503
+
+# -------------------- STUDENT API --------------------
+
+@app.route("/api/student/subjects", methods=["GET"])
+def student_get_subjects():
+    try:
+        res = requests.get(f"{STUDENT_URL}/student/subjects", timeout=2)
+        return jsonify(res.json()), res.status_code
+    except Exception as e:
+        print("STUDENT GATEWAY ERROR:", e)
+        return jsonify({"error": "Student service unavailable"}), 503
+
+
+@app.route("/api/student/enlist", methods=["POST"])
+def student_enlist_class():
+    try:
+        payload = request.get_json()
+        res = requests.post(
+            f"{STUDENT_URL}/student/enlist",
+            json=payload,
+            timeout=2
+        )
+        return jsonify(res.json()), res.status_code
+
+    except Exception as e:
+        print("STUDENT GATEWAY ERROR:", e)
+        return jsonify({"error": "Student service unavailable"}), 503
+
+
+@app.route("/api/student/records", methods=["GET"])
+def student_records():
+    try:
+        username = request.args.get("username")  # student username from frontend
+        res = requests.get(
+            f"{STUDENT_URL}/student/records",
+            params={"username": username},
+            timeout=2
+        )
+        return jsonify(res.json()), res.status_code
+
+    except Exception as e:
+        print("STUDENT GATEWAY ERROR:", e)
+        return jsonify({"error": "Student service unavailable"}), 503
 
 
 

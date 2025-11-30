@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/student_controller.js"></script>
+</head>
+<body>
+
+    <h1>User Dashboard</h1>
+    <button onclick="window.location.href='/'" style="float:right;">Logout</button>
+
+    <!-- ---------------------------------------- -->
+    <!-- 1. VIEW AVAILABLE CLASSES -->
+    <!-- ---------------------------------------- -->
+    <h2>Available Classes</h2>
+
+    <table border="1" id="available_classes">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Course</th>
+                <th>Units</th>
+                <th>Enrollees</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <br>
+    <label>Selected Course:</label>
+    <input type="text" id="selected_course" readonly>
+    <button id="enlist_btn">Enlist</button>
+
+    <hr>
+
+    <!-- ---------------------------------------- -->
+    <!-- 3. VIEW ENLISTED CLASSES + GRADES -->
+    <!-- ---------------------------------------- -->
+    <h2>My Classes & Grades</h2>
+
+    <table border="1" id="my_classes">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</body>
+</html>
