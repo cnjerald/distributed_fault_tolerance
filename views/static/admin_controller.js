@@ -10,7 +10,9 @@ $(document).ready(function () {
     });
 
     // ---------------- Existing user management logic ----------------
+    // Use environment variable if set (inside Docker), fallback to localhost for host browser
     const API_BASE = "http://localhost:5000/api/admin";
+
 
     // Simple authorization check
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));

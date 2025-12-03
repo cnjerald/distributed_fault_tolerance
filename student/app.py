@@ -4,10 +4,11 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 DB_CONFIG = {
-    "host": "localhost",
+    "host": "host.docker.internal",  # points to your host machine
     "database": "enrollment_db",
     "user": "postgres",
-    "password": "1234"
+    "password": "1234",
+    "port": 5432                      # optional, default is 5432
 }
 
 def get_connection():
@@ -117,4 +118,4 @@ def student_records():
 
 # -------------------- MAIN --------------------
 if __name__ == "__main__":
-    app.run(port=5005, debug=True)
+    app.run(host="0.0.0.0",port=5005, debug=True)

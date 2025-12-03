@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    ports:
+      - "5000:5000"          # host access
+    networks:
+      schoolnet:
+        ipv4_address: 172.25.0.10
+
+  login:
+    build: ./login
+    container_name: login
+    ports:
+      - "5001:5001"
+    networks:
+      schoolnet:
+        ipv4_address: 172.25.0.11
+
+  admin:
+    build: ./admin
+    container_name: admin
+    ports:
+      - "5003:5003"
+    networks:
+      schoolnet:
+        ipv4_address: 172.25.0.12
+
+  teacher:
+    build: ./teacher
+    container_name: teacher
+    ports:
+      - "5004:5004"
+    networks:
+      schoolnet:
+        ipv4_address: 172.25.0.13
+
+  student:
+    build: ./student
+    container_name: student
+    ports:
+      - "5005:5005"
+    networks:
+      schoolnet:
+        ipv4_address: 172.25.0.14
+
+  views:
+    build: ./views
+    container_name: views
+    ports:
+      - "5006:5006"
+    networks:
+      schoolnet:
+        ipv4_address: 172.25.0.15
+
+
+networks:
+  schoolnet:
+    external: true

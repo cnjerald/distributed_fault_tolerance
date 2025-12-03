@@ -13,10 +13,10 @@ CORS(app)
 
 
 # ---------------- Backend Nodes ----------------
-LOGIN_URL = "http://localhost:5001/login"
-ADMIN_URL = "http://localhost:5003"
-TEACHER_URL = "http://localhost:5004"
-STUDENT_URL = "http://localhost:5005"
+LOGIN_URL = "http://login:5001/login"
+ADMIN_URL = "http://admin:5003"
+TEACHER_URL = "http://teacher:5004"
+STUDENT_URL = "http://student:5005"
 
 
 # ---------------- Routes ----------------
@@ -284,4 +284,4 @@ if __name__ == "__main__":
     # Ensure folders exist
     os.makedirs("templates", exist_ok=True)
     os.makedirs("static/js", exist_ok=True)
-    app.run(port=5000, debug=True)
+    app.run(host="0.0.0.0",port=5000, debug=True)

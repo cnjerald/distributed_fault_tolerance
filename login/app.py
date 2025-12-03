@@ -6,10 +6,11 @@ app = Flask(__name__)
 # Make sure you created this database first:
 # CREATE DATABASE enrollment_db;
 DB_CONFIG = {
-    "host": "localhost",
+    "host": "host.docker.internal",  # points to your host machine
     "database": "enrollment_db",
     "user": "postgres",
-    "password": "1234"
+    "password": "1234",
+    "port": 5432                      # optional, default is 5432
 }
 
 def init_db():
@@ -77,4 +78,4 @@ def login():
 
 if __name__ == "__main__":
     init_db()  # just ensure table exists
-    app.run(port=5001, debug=True)
+    app.run(host="0.0.0.0",port=5001, debug=True)

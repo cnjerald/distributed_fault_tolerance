@@ -1,5 +1,5 @@
 // python -m http.server 3000
-
+const API_LOGIN = "http://localhost:5000/api/login";
 $(document).ready(function () {
 
     $("#login").click(function () {
@@ -8,8 +8,9 @@ $(document).ready(function () {
             password: $("#password").val()
         };
 
+
         $.ajax({
-            url: "http://localhost:5000/api/login",
+            url: API_LOGIN,
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(data),
