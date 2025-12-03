@@ -20,9 +20,9 @@ $(document).ready(function () {
 
                     // Redirect based on user type
 
-                    if (type === "ADMIN") window.location.href = "admin.html";
-                    else if (type === "TEACHER") window.location.href = "teacher.html";
-                    else window.location.href = "student.html";
+                    if (type === "ADMIN") window.location.href = "/admin";
+                    else if (type === "TEACHER") window.location.href = "/teacher";
+                    else window.location.href = "/student";
                 } else {
                     alert("Invalid credentials");
                 }
